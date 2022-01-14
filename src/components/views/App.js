@@ -11,7 +11,7 @@ const AppView = forwardRef(function (props, ref) {
     );
   }
   
-  if (props.playerName.length < 1) {
+  if (props.playerName.length > 1) {
     return (
       <>
         <form> 
