@@ -18,7 +18,7 @@ const AppView = forwardRef(function (props, ref) {
       <form> 
         <label for="pname">Player name:</label>
         <br /><br />
-        <input type="text" id="pname" placeholder="Player" />
+        <input ref={ref} type="text" id="pname" placeholder="Player" />
         <br /><br />
         <input 
            type="button" 
