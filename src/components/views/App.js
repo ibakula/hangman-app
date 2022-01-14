@@ -15,16 +15,12 @@ const AppView = forwardRef(function (props, ref) {
 
   return (
     <>
-      <form> 
+      <form onSubmit={props.handleNameChange}> 
         <label for="pname">Player name:</label>
         <br /><br />
         <input ref={ref} type="text" id="pname" placeholder="Player" />
         <br /><br />
-        <input 
-           type="button" 
-           onClick={props.handleNameChange} 
-           value="Submit"
-        />
+        <input type="submit" value="Submit" />
         <br /><br />
       </form>
       {props.playerName instanceof Error && (<>
