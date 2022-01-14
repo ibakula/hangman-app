@@ -1,4 +1,5 @@
 import React from 'react';
+import AppView from '../App.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -8,9 +9,10 @@ class App extends React.Component {
     };
     this.nameElementRef = React.createRef();
   }
-  
+
   handleNameChange = (e) => {
-    if (!(this.nameElementRef.current instanceof HTMLInputElement)) {
+    if (this.nameElementRef.current == null || 
+       !(this.nameElementRef.current instanceof HTMLInputElement)) {
       this.setState({ playerName: new Error("Unkown error occured. Try again.") });
       return;
     }
@@ -23,7 +25,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div />
+      <AppView 
+         ref={this.nameElementRef}
+         playerName={this.state.playerName}
+         handleNameChange={this.handleNameChange} 
+      />
     );
   }
 }
