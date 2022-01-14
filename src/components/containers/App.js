@@ -1,5 +1,5 @@
 import React from 'react';
-import AppView from '../App.js';
+import AppView from '../views/App';
 
 class App extends React.Component {
   constructor(props) {

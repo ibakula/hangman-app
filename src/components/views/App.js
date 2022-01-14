@@ -19,7 +19,7 @@ const AppView = forwardRef(function (props, ref) {
     );
   }
   
-  const GameContainer = lazy(() => import('../containers/Game.js'));
+  const GameContainer = lazy(() => import('../containers/Game'));
   // Note: Improve styling for loading message
   return (
     <Suspense fallback={<div>Game starting...</div>}>
