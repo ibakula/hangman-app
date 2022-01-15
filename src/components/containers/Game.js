@@ -11,7 +11,9 @@ class GameContainer extends Component {
   }
 
   handleSelectedLetter = (e) => {
-    if (!(e instanceof KeyboardEvent)) {
+    if (!(e instanceof KeyboardEvent) ||
+      // Game over
+      this.state.mistakes > 7) {
       return;
     }
 
@@ -38,7 +40,7 @@ class GameContainer extends Component {
      <GameView 
        matchedPos={this.state.matchedPos}
        mistakes={this.state.mistakes}
-       handleSelectedLetter={this.handleSelectedLetter} 
+       onKeyPress={this.handleSelectedLetter} 
        content={"Veni; vidi; vici...".toLowerCase()}
      />
    );
