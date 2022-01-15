@@ -1,5 +1,5 @@
 import { Suspense, forwardRef, lazy } from 'react';
-import style from './App.css';
+import style from './App.module.css';
 
 const AppView = forwardRef(function (props, ref) {
   if (props.playerName.length > 1) {
