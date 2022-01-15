@@ -13,7 +13,9 @@ class GameContainer extends Component {
   handleSelectedLetter = (e) => {
     if (!(e instanceof KeyboardEvent) ||
       // Game over
-      this.state.mistakes > 7) {
+      this.state.mistakes > 7 ||
+      // Unicode letter codes ONLY
+      //(e.keyCode >)) {
       return;
     }
 
