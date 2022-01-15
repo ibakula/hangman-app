@@ -15,7 +15,12 @@ class GameContainer extends Component {
       // Game over
       this.state.mistakes >= 6 ||
       // Unicode letter codes ONLY
-      //(e.keyCode >)) {
+      (e.keyCode < 48 ||
+      (e.keyCode > 57 && 
+      e.keyCode < 65) ||
+      (e.keyCode > 90 && 
+      e.keyCode < 97) ||
+      e.keyCode > 122)) {
       return;
     }
 
