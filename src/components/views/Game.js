@@ -1,6 +1,8 @@
 function GameView(props) {
   return (
-    <></>
+    <div>
+      
+    </div>
   );
 }
 
