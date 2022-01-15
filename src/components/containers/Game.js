@@ -35,12 +35,18 @@ class GameContainer extends Component {
     this.setState({ matchedPos: this.state.matchedPos.concat(matchesPos) });
   }
 
+  handleRestart = (e) => {
+    e.preventDefault();
+    this.setState({ mistakes: 0, matchedPos: [] });
+  }
+
   render() {
    return (
      <GameView 
        matchedPos={this.state.matchedPos}
        mistakes={this.state.mistakes}
        onKeyPress={this.handleSelectedLetter} 
+       handleRestart={this.handleRestart}
        content={"Veni; vidi; vici...".toLowerCase()}
      />
    );
