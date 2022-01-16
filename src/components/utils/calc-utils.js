@@ -1,3 +1,11 @@
+/*
+ * @DESCRIPTION:
+ *  Utility function which deduces special characters
+ *  count from the character count of the guess words.
+ *  
+ *  Purpose of the function is its reusability for
+ *  the end of the game "if-checks" throughout the code.
+ */
 function calculatePossibleMatches(content) {
   let count = content.length;
 
@@ -32,6 +40,16 @@ function isNotValidKey(keyCode) {
      keyCode > 122);
 }
 
-export calculatePossibleMatches;
+function calculateScore(quoteLength, uniqueLetters, errors, duration) {
+  return 0;
+}
 
+// Score calculation by error count solely
+function calculateScoreByErrorCount(errorCount) {
+  return (100/1+errorCount);
+}
+
+export calculatePossibleMatches;
 export isNotValidKey;
+export calculateScore;
+export calculateScoreByErrorCount;
