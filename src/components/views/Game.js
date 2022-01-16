@@ -10,7 +10,8 @@ function GameView(props) {
   return (
     <div>
       {gameOver ? <ScoreboardContainer 
-        startDate={props.startDate} /> : <HangmanView 
+        startDate={props.startDate} /> : 
+      <HangmanView 
         mistakes={props.mistakes}
       />
       <WordsView 
