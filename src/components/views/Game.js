@@ -1,6 +1,7 @@
 import WordsView from './Words';
 import HangmanView from './Hangman';
 import { calculatePossibleMatches } from '../utils/calc-utils.js';
+import ScoreboardContainer from '../containers/Scoreboard';
 
 function GameView(props) {/
   let gameOver = (props.mistakes > 5 || 
@@ -8,7 +9,7 @@ function GameView(props) {/
 
   return (
     <div>
-      {gameOver ? <div /> : <HangmanView 
+      {gameOver ? <ScoreboardContainer /> : <HangmanView 
         mistakes={props.mistakes}
       />
       <WordsView 
