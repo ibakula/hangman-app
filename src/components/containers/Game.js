@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import GameView from '../views/Game';
-import { calculatePossibleMatches } from '../utils/calc-utils.js';
+import { 
+  calculatePossibleMatches,
+  isNotValidKey 
+} from '../utils/calc-utils.js';
 
 class GameContainer extends Component {
   constructor(props) {
@@ -16,13 +19,7 @@ class GameContainer extends Component {
       // Game over
       //this.state.mistakes >= 6 ||
       //(this.state.matchedPos.length >= calculatePossibleMatches(this.props.content))
-      // Unicode letter codes ONLY
-      (e.keyCode < 48 ||
-      (e.keyCode > 57 && 
-      e.keyCode < 65) ||
-      (e.keyCode > 90 && 
-      e.keyCode < 97) ||
-      e.keyCode > 122)) {
+      isNotValidKey(e.keyCode)) {
       return;
     }
 

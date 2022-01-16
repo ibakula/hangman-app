@@ -1,16 +1,10 @@
 import style from './Words.module.css';
+import { isNotValidKey } from '../utils/calc-utils';
 
 function WordsView(props) {
   let lettersAndDashes = "";
   for (let i = 0; i < props.content.length; ++i) {
-    // If not a letter according to Unicode then reveal character
-    // Note: numbers will not get revealed either
-    if (props.content.charCodeAt(i) < 48 ||
-      (props.content.charCodeAt(i) > 57 && 
-      props.content.charCodeAt(i) < 65) ||
-      (props.content.charCodeAt(i) > 90 && 
-      props.content.charCodeAt(i) < 97) ||
-      props.content.charCodeAt(i) > 122) {
+    if (isNotValidKey(props.content.charCodeAt(i))) {
       lettersAndDashes += props.content[i];
       continue;
     }
