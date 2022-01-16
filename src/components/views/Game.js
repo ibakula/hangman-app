@@ -3,7 +3,7 @@ import HangmanView from './Hangman';
 import { calculatePossibleMatches } from '../utils/calc-utils.js';
 import ScoreboardContainer from '../containers/Scoreboard';
 
-function GameView(props) {/
+function GameView(props) {
   let gameOver = (props.mistakes > 5 || 
   props.matchedPos.length >= calculatePossibleMatches(props.content));
 
