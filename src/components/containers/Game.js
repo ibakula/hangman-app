@@ -14,7 +14,7 @@ class GameContainer extends Component {
   handleSelectedLetter = (e) => {
     if (!(e instanceof KeyboardEvent) ||
       // Game over
-      this.state.mistakes >= 6 ||
+      //this.state.mistakes >= 6 ||
       //(this.state.matchedPos.length >= calculatePossibleMatches(this.props.content))
       // Unicode letter codes ONLY
       (e.keyCode < 48 ||
