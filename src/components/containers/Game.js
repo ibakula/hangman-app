@@ -10,7 +10,8 @@ class GameContainer extends Component {
     super(props);
     this.state = {
       mistakes: 0,
-      matchedPos: []
+      matchedPos: [],
+      startDate: new Date()
     };
   }
 
@@ -43,7 +44,11 @@ class GameContainer extends Component {
 
   handleRestart = (e) => {
     e.preventDefault();
-    this.setState({ mistakes: 0, matchedPos: [] });
+    this.setState({ 
+      mistakes: 0, 
+      matchedPos: [],
+      startDate: new Date()
+    });
   }
 
   componentDidMount() {
@@ -61,6 +66,7 @@ class GameContainer extends Component {
        mistakes={this.state.mistakes}
        handleRestart={this.handleRestart}
        content={"Veni; vidi; vici...".toLowerCase()}
+       startDate={this.state.startTime}
      />
    );
   }
