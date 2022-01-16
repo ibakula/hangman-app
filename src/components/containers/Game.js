@@ -47,12 +47,19 @@ class GameContainer extends Component {
     this.setState({ mistakes: 0, matchedPos: [] });
   }
 
+  componentDidMount() {
+    document.addEventListener("keypress", this.handleSelectedLetter, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keypress", this.handleSelectedLetter, false);
+  }
+
   render() {
    return (
      <GameView 
        matchedPos={this.state.matchedPos}
        mistakes={this.state.mistakes}
-       onKeyPress={this.handleSelectedLetter} 
        handleRestart={this.handleRestart}
        content={"Veni; vidi; vici...".toLowerCase()}
      />
