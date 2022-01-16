@@ -13,7 +13,7 @@ function calculatePossibleMatches(content) {
   }
 
   return count;
-};
+}
 
 
 /*
