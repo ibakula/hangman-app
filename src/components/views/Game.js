@@ -7,7 +7,7 @@ function GameView(props) {
   let gameOver = props.matchedPos.length >= calculatePossibleMatches(props.content);
 
   return (
-    <div>
+    <>
       {gameOver ? (<ScoreboardContainer 
         startDate={props.startDate}
         playerName={props.playerName} 
@@ -26,7 +26,7 @@ function GameView(props) {
       <form onSubmit={props.handleRestart}>
         <input type="submit" value="Restart game" />
       </form>
-    </div>
+    </>
   );
 }
 

@@ -1,13 +1,15 @@
+import style from './Hangman.module.css';
+
 function HangmanView(props) {
   return (
-    <div>
+    <div className={style.hangman}>
       <img 
        src={`/images/Hangman-${props.mistakes > 6 ? 6 : prop.mistakes}.png`} 
        alt="A man on gilded gallows" 
        width="256"
        height="256"
       />
-      <p>{props.mistakes}</p>
+      <h2 className={props.mistakes > 0 ? `${style.tally} ${style.red}` : `${style.tally}`}>{props.mistakes} wrong guesses.</p>
     </div>
   );
 }

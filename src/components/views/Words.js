@@ -22,7 +22,7 @@ function WordsView(props) {
   }
 
   return (
-    <h3 className={style.h1}>{lettersAndDashes}</h3>
+    <h1 className={style.spacing}>{lettersAndDashes}</h3>
   );
 }
 

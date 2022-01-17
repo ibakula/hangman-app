@@ -1,0 +1,13 @@
+.hangman {
+  width: 300px;
+}
+
+.tally {
+  font-weight: bold;
+  text-align: center;
+  color: green;
+}
+
+.red {
+  color: red!important;
+}
