@@ -7,7 +7,7 @@ function ScoreboardView(props) {
       <div>
         <p>Your score: {calculateScoreByErrorCount(props.mistakes)}</p>
       </div>
-      <table>
+      <table className={style.noTdBorder}>
         <tr><th>Player</th><th>Score</th></tr>
         {
           Array.isArray(props.scores) ? 
@@ -23,7 +23,7 @@ function ScoreboardView(props) {
               <td>{score['score']}</td>
             </tr>);
           }) : 
-          (<tr><td>Loading highscores..</td></tr>)
+          (<tr><td colspan="2">Loading highscores..</td></tr>)
         }
       </table>
     </>
