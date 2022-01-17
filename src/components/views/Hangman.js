@@ -5,7 +5,7 @@ function HangmanView(props) {
     <div className={style.hangman}>
       <img 
        src={`/images/Hangman-${props.mistakes > 6 ? 6 : prop.mistakes}.png`} 
-       alt="A man on gilded gallows" 
+       alt="A stick figure with a noose around its neck" 
        width="256"
        height="256"
       />
