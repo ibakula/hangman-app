@@ -52,7 +52,9 @@ class ScoreboardContainer extends Component {
 
   componentDidUpdate(prevProps) {
     /*if (this.props.scoresData != prevProps.scoresData) {
-      this.state.highscores;
+      this.setState({ 
+        highscores: orderHighscores(this.props.scoresData, false)
+      });
     }*/
   }
 
@@ -61,7 +63,7 @@ class ScoreboardContainer extends Component {
       <ScoreboardView 
         startDate={this.props.startDate} 
         endDate={new Date()}
-        scores={[]}
+        scores={this.state.highscores}
       />
     );
   }
