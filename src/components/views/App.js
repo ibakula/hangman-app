@@ -6,29 +6,31 @@ const AppView = forwardRef(function (props, ref) {
     props.playerName.length > 1) {
     const GameContainer = lazy(() => import('../containers/Game'));
     return (
-      <Suspense fallback={<div>Game starting...</div>}>
-        <GameContainer 
-          playerName={props.playerName} 
-        />
-      </Suspense>
+      <main>
+        <Suspense fallback={<div>Game starting...</div>}>
+          <GameContainer 
+            playerName={props.playerName} 
+          />
+        </Suspense>
+      </main>
     );
   }
 
   return (
-    <>
-      <form onSubmit={props.handleNameChange}> 
+    <main>
+      <form className={style.playerDataForm} onSubmit={props.handleNameChange}> 
         <label for="pname">Player name:</label>
-        <br /><br />
+        <br />
         <input ref={ref} type="text" id="pname" placeholder="Player" />
-        <br /><br />
+        <br />
         <input type="submit" value="Submit" />
-        <br /><br />
+        <br />
       </form>
-      {props.playerName instanceof Error && (<>
-        <h3 className={style.errorMsg}>Couldn't start the game.</h3>
+      {props.playerName instanceof Error && (<div className={style.errorMsg}>
+        <h3>Couldn't start the game.</h3>
         <p>{props.playerName.message}</p>
-      </>)}
-    </>
+      </div>)}
+    </main>
   );
 });
 
