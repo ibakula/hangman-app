@@ -19,11 +19,9 @@ const AppView = forwardRef(function (props, ref) {
   return (
     <main>
       <form className={style.playerDataForm} onSubmit={props.handleNameChange}> 
-        <label for="pname">Player name:</label>
+        <input ref={ref} type="text" id="pname" placeholder="First enter player name here" />
         <br />
-        <input ref={ref} type="text" id="pname" placeholder="Player" />
-        <br />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Press to continue" />
         <br />
       </form>
       {props.playerName instanceof Error && (<div className={style.errorMsg}>
