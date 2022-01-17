@@ -29,3 +29,13 @@ main {
 main > * {
   margin-bottom: 25px;
 }
+
+input[type=submit] {
+  border: 1px solid grey;
+  padding: 10px 17px;
+  width: 100%;
+}
+
+input[type=submit]:hover {
+  background-color: #dddddd;
+}

@@ -22,13 +22,3 @@
   background-color: lightblue;
   outline: none;
 }
-
-.playerDataForm input[type=submit] {
-  border: 1px solid grey;
-  padding: 10px 17px;
-  width: 100%;
-}
-
-.playerDataForm input[type=submit]:hover {
-  background-color: #dddddd;
-}
