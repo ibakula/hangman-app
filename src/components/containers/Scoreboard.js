@@ -2,7 +2,7 @@ import { Component } from 'react';
 import ScoreboardView from '../views/Scoreboard';
 import {
   orderHighscores
-} from './Scoreboard/Utils';
+} from './scoreboard/Utils';
 
 class ScoreboardContainer extends Component {
   constructor(props) {
