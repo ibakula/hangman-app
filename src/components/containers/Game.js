@@ -15,11 +15,10 @@ class GameContainer extends Component {
     };
   }
 
-  handleSelectedLetter = (e) => {
+  handleSelectedLetter = e => {
     if (!(e instanceof KeyboardEvent) ||
       // Game over
-      //this.state.mistakes >= 6 ||
-      //(this.state.matchedPos.length >= calculatePossibleMatches(this.props.content))
+      (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici..."))
       isNotValidKey(e.keyCode)) {
       return;
     }
@@ -27,9 +26,16 @@ class GameContainer extends Component {
     const lowKey = e.key.toLowerCase();
     const matchesPos = [];
     // Note: this test content will be replaced with an actual prop from redux
+    let found = false;
     const testContent = "veni; vidi; vici...";
     for (let i = 0; i < testContent.length; ++i) {
       if (testContent[i] === lowKey) {
+        found = this.state.matchedPos(function (pos) {
+          return (pos == i);
+        });
+        if (found) {
+          return;
+        }
         matchesPos.push(i);
       }
     }
@@ -42,7 +48,7 @@ class GameContainer extends Component {
     this.setState({ matchedPos: this.state.matchedPos.concat(matchesPos) });
   }
 
-  handleRestart = (e) => {
+  handleRestart = e => {
     e.preventDefault();
     this.setState({ 
       mistakes: 0, 
@@ -59,6 +65,12 @@ class GameContainer extends Component {
     document.removeEventListener("keypress", this.handleSelectedLetter, false);
   }
 
+  componentDidUpdate() {
+    if (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici...")) {
+      document.removeEventListener("keypress", this.handleSelectedLetter, false);
+    }
+  }
+
   render() {
    return (
      <GameView 
@@ -66,8 +78,8 @@ class GameContainer extends Component {
        matchedPos={this.state.matchedPos}
        mistakes={this.state.mistakes}
        handleRestart={this.handleRestart}
-       content={"Veni; vidi; vici...".toLowerCase()}
-       startDate={this.state.startTime}
+       content={"Veni; vidi; vici..."}
+       startDate={this.state.startDate}
      />
    );
   }

@@ -5,7 +5,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      playerName = "";
+      playerName = ""
     };
     this.nameElementRef = React.createRef();
   }
@@ -13,10 +13,10 @@ class App extends React.Component {
   handleNameChange = (e) => {
     if (this.nameElementRef.current == null || 
        !(this.nameElementRef.current instanceof HTMLInputElement)) {
-      this.setState({ playerName: new Error("Unkown error occured. Try again.") });
+      this.setState({ playerName: new Error("Unknown error occured. Try again.") });
       return;
     }
-    if (this.nameElementRef.current.value.length < 1) {
+    if (this.nameElementRef.current.value.length < 4) {
       this.setState({ playerName: new Error("Please choose a valid name.") });
       return;
     }

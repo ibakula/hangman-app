@@ -9,8 +9,8 @@ function WordsView(props) {
       continue;
     }
 
-    let found = props.matchedPos.find(pos => {
-      pos == i;
+    let found = props.matchedPos.find(function(pos) {
+      return pos == i;
     });
 
     if (found) {

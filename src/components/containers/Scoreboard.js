@@ -1,46 +1,8 @@
 import { Component } from 'react';
 import ScoreboardView from '../views/Scoreboard';
-import { 
-  calculateScoreByErrorCount 
-} from '../utils/calc-utils';
-
-function orderHighscores(data, orderByAsc = true) {
-  let orderedHighscore = [];
-
-  if (Array.isArray(data)) {
-    data.forEach(function(score) {
-      let calculatedScore = {
-        score: calculateScoreByErrorCount(score.errors),
-        userName: score.userName
-      };
-
-      if (orderedHighscore.length == 0) {
-        orderedHighscore.push(calculatedScore);
-        return;
-      }
-
-      for (let i = 0; i < orderedHighscore.length; ++i) {
-        if (orderByAsc && 
-          orderedHighscore[i].score > calculatedScore.score) {
-          orderedHighscore.splice(i, 0, calculatedScore);
-          break;
-        }
-        else if (!orderByAsc && 
-          orderedHighscore[i].score < calculatedScore.score) {
-          orderedHighscore.splice((i+1), 0, calculatedScore);
-          break;
-        }
-
-        if (i == (orderedHighscore.length-1)) {
-          orderedHighscore.push(calculatedScore);
-          break;
-        }
-      }
-    });
-  }
-
-  return orderedHighscores;
-}
+import {
+  orderHighscores
+} from './Scoreboard/Utils';
 
 class ScoreboardContainer extends Component {
   constructor(props) {
@@ -52,8 +14,12 @@ class ScoreboardContainer extends Component {
 
   componentDidUpdate(prevProps) {
     /*if (this.props.scoresData != prevProps.scoresData) {
+      let data = this.props.scoresData.concat([{
+        userName: `${this.props.playerName} (You)`,
+        errors: this.props.mistakes
+      }]);
       this.setState({ 
-        highscores: orderHighscores(this.props.scoresData, false)
+        highscores: orderHighscores(data, false)
       });
     }*/
   }
@@ -62,7 +28,7 @@ class ScoreboardContainer extends Component {
     return (
       <ScoreboardView 
         playerName={this.props.playerName}
-        playerScore={calculateScoreByErrorCount(this.props.mistakes)}
+        mistakes={this.props.mistakes}
         startDate={this.props.startDate} 
         endDate={new Date()}
         scores={this.state.highscores}

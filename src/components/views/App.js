@@ -2,7 +2,8 @@ import { Suspense, forwardRef, lazy } from 'react';
 import style from './App.module.css';
 
 const AppView = forwardRef(function (props, ref) {
-  if (props.playerName.length > 1) {
+  if (typeof(props.playerName) == "string" && 
+    props.playerName.length > 1) {
     const GameContainer = lazy(() => import('../containers/Game'));
     return (
       <Suspense fallback={<div>Game starting...</div>}>
@@ -24,7 +25,7 @@ const AppView = forwardRef(function (props, ref) {
         <br /><br />
       </form>
       {props.playerName instanceof Error && (<>
-        <h3 className={`${style.errorMsg}`}>Couldn't start the game.</h3>
+        <h3 className={style.errorMsg}>Couldn't start the game.</h3>
         <p>{props.playerName.message}</p>
       </>)}
     </>
