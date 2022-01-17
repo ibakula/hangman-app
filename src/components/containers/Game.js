@@ -62,6 +62,7 @@ class GameContainer extends Component {
   render() {
    return (
      <GameView 
+       playerName={this.props.playerName}
        matchedPos={this.state.matchedPos}
        mistakes={this.state.mistakes}
        handleRestart={this.handleRestart}

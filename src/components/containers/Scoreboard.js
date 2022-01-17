@@ -61,6 +61,8 @@ class ScoreboardContainer extends Component {
   render() {
     return (
       <ScoreboardView 
+        playerName={this.props.playerName}
+        playerScore={calculateScoreByErrorCount(this.props.mistakes)}
         startDate={this.props.startDate} 
         endDate={new Date()}
         scores={this.state.highscores}

@@ -7,7 +7,7 @@ const AppView = forwardRef(function (props, ref) {
     return (
       <Suspense fallback={<div>Game starting...</div>}>
         <GameContainer 
-          playerName={${props.playerName}} 
+          playerName={props.playerName} 
         />
       </Suspense>
     );
