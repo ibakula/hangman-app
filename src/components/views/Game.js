@@ -13,6 +13,8 @@ function GameView(props) {
         playerName={props.playerName} 
         mistakes={props.mistakes} />) : 
       (<>
+        <h3 style="text-align:center;">Instructions:</h3>
+        <p style="text-align:center;">Choose and press a letter key (A-Z) on your keyboard to guess the hidden letters.</p>
         <HangmanView 
           mistakes={props.mistakes}
         />
@@ -20,8 +22,6 @@ function GameView(props) {
           content={props.content} 
           matchedPos={props.matchedPos}
         />
-        <h3>Instructions:</h3>
-        <p>Choose and press a letter key (A-Z) on your keyboard to guess the hidden letters.</p>
       </>)}
       <form onSubmit={props.handleRestart}>
         <input type="submit" value="Restart game" />
