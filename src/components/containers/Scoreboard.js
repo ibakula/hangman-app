@@ -33,6 +33,7 @@ function orderHighscores(data, orderByAsc = true) {
 
         if (i == (orderedHighscore.length-1)) {
           orderedHighscore.push(calculatedScore);
+          break;
         }
       }
     });
