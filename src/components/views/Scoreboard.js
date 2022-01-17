@@ -1,5 +1,5 @@
 import { calculateScoreByErrorCount } from '../utils/calc-utils.js';
-import style from 'Scoreboard.module.css';
+import style from './Scoreboard.module.css';
 
 function ScoreboardView(props) {
   return (

@@ -2,7 +2,7 @@ import {
   calculateScoreByErrorCount 
 } from '../../utils/calc-utils';
 
-function orderHighscores(data, orderByAsc = true) {
+export function orderHighscores(data, orderByAsc = true) {
   let orderedHighscore = [];
 
   if (Array.isArray(data)) {
@@ -38,6 +38,4 @@ function orderHighscores(data, orderByAsc = true) {
   }
 
   return orderedHighscore;
-}
-
-export orderHighscores;
+};

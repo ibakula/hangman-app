@@ -18,7 +18,7 @@ class GameContainer extends Component {
   handleSelectedLetter = e => {
     if (!(e instanceof KeyboardEvent) ||
       // Game over
-      (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici..."))
+      (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici...")) ||
       isNotValidKey(e.keyCode)) {
       return;
     }

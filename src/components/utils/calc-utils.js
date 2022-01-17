@@ -6,7 +6,7 @@
  *  Purpose of the function is its reusability for
  *  the end of the game "if-checks" throughout the code.
  */
-function calculatePossibleMatches(content) {
+export function calculatePossibleMatches(content) {
   let count = content.length;
 
   for (let i = 0; i < content.length; ++i) {
@@ -21,7 +21,7 @@ function calculatePossibleMatches(content) {
   }
 
   return count;
-}
+};
 
 
 /*
@@ -33,23 +33,18 @@ function calculatePossibleMatches(content) {
  *  This function checks whether only
  *  A-Z and 0-1 keys are in use.
  */
-function isNotValidKey(keyCode) {
+export function isNotValidKey(keyCode) {
   return (keyCode < 48 || 
     (keyCode > 57 && keyCode < 65) ||
     (keyCode > 90 && keyCode < 97) ||
      keyCode > 122);
-}
+};
 
-function calculateScore(quoteLength, uniqueLetters, errors, duration) {
+export function calculateScore(quoteLength, uniqueLetters, errors, duration) {
   return 0;
-}
+};
 
 // Score calculation by error count solely
-function calculateScoreByErrorCount(errorCount) {
+export function calculateScoreByErrorCount(errorCount) {
   return (100/1+errorCount);
-}
-
-export calculatePossibleMatches;
-export isNotValidKey;
-export calculateScore;
-export calculateScoreByErrorCount;
+};
