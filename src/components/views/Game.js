@@ -9,6 +9,7 @@ function GameView(props) {
   return (
     <>
       {gameOver ? (<ScoreboardContainer 
+        content={props.content}
         startDate={props.startDate}
         playerName={props.playerName} 
         mistakes={props.mistakes} />) : 

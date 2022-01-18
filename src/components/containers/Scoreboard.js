@@ -27,6 +27,7 @@ class ScoreboardContainer extends Component {
   render() {
     return (
       <ScoreboardView 
+        content={this.props.content}
         playerName={this.props.playerName}
         mistakes={this.props.mistakes}
         startDate={this.props.startDate} 
