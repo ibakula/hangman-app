@@ -17,7 +17,7 @@ function ScoreboardView(props) {
         <p>You have guessed: <br />&quot;{props.content}&quot;</p>
         <p>You have {props.mistakes.length} failed attempts.</p>
         <p>In a duration of {finishTime} {inSeconds ? 'seconds' : 'minutes'}</p>
-        <p>Your score: {calculateScoreByErrorCount(props.mistakes)}</p>
+        <p>Your score: {calculateScoreByErrorCount(props.mistakes.length)}</p>
       </div>
       <table className={style.noTdBorder}>
         <tr><th>Player</th><th>Score</th></tr>
