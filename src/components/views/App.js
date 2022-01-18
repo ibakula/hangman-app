@@ -1,10 +1,10 @@
 import { Suspense, forwardRef, lazy } from 'react';
 import style from './App.module.css';
+const GameContainer = lazy(() => import('../containers/Game'));
 
 const AppView = forwardRef(function (props, ref) {
   if (typeof(props.playerName) == "string" && 
     props.playerName.length > 1) {
-    const GameContainer = lazy(() => import('../containers/Game'));
     return (
       <main>
         <Suspense fallback={<div>Game starting...</div>}>

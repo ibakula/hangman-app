@@ -13,8 +13,8 @@ function GameView(props) {
         playerName={props.playerName} 
         mistakes={props.mistakes} />) : 
       (<>
-        <h3 style="text-align:center;">Instructions:</h3>
-        <p style="text-align:center;">Choose and press a letter key (A-Z) on your keyboard to guess the hidden letters.</p>
+        <h3 style={{textAlign:"center"}}>Instructions:</h3>
+        <p style={{textAlign:"center"}}>Choose and press a letter key (A-Z) on your keyboard to guess the hidden letters.</p>
         <HangmanView 
           mistakes={props.mistakes}
         />

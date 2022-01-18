@@ -30,10 +30,10 @@ class GameContainer extends Component {
     const testContent = "veni; vidi; vici...";
     for (let i = 0; i < testContent.length; ++i) {
       if (testContent[i] === lowKey) {
-        found = this.state.matchedPos(function (pos) {
+        found = this.state.matchedPos.find(function (pos) {
           return (pos == i);
         });
-        if (found) {
+        if (found != null) {
           return;
         }
         matchesPos.push(i);
@@ -65,23 +65,27 @@ class GameContainer extends Component {
     document.removeEventListener("keypress", this.handleSelectedLetter, false);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici...")) {
       document.removeEventListener("keypress", this.handleSelectedLetter, false);
+    }
+    if (this.state.matchedPos.length == 0 && 
+      prevState.matchedPos != this.state.matchedPos) {
+      document.addEventListener("keypress", this.handleSelectedLetter, false);
     }
   }
 
   render() {
-   return (
-     <GameView 
-       playerName={this.props.playerName}
-       matchedPos={this.state.matchedPos}
-       mistakes={this.state.mistakes}
-       handleRestart={this.handleRestart}
-       content={"Veni; vidi; vici..."}
-       startDate={this.state.startDate}
-     />
-   );
+    return (
+      <GameView 
+        playerName={this.props.playerName}
+        matchedPos={this.state.matchedPos}
+        mistakes={this.state.mistakes}
+        handleRestart={this.handleRestart}
+        content={"Veni; vidi; vici..."}
+        startDate={this.state.startDate}
+      />
+    );
   }
 }
 

@@ -13,7 +13,7 @@ function WordsView(props) {
       return pos == i;
     });
 
-    if (found) {
+    if (found != null) {
       lettersAndDashes += props.content[i];
       continue;
     }
