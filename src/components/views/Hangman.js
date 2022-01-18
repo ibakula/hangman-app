@@ -1,7 +1,7 @@
 import style from './Hangman.module.css';
 
 function HangmanView(props) {
-  const imgNr = props.mistakes > 6 ? 6 : props.mistakes;
+  const imgNr = props.mistakes.length > 6 ? 6 : props.mistakes.length;
   return (
     <div className={style.hangman}>
       <img 
@@ -10,7 +10,7 @@ function HangmanView(props) {
        width="256"
        height="256"
       />
-      <h2 className={props.mistakes > 0 ? `${style.tally} ${style.red}` : `${style.tally}`}>{props.mistakes} wrong guesses.</h2>
+      <h2 className={props.mistakes.length > 0 ? `${style.tally} ${style.red}` : `${style.tally}`}>{props.mistakes.length} wrong guesses.</h2>
     </div>
   );
 }

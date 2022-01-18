@@ -9,7 +9,7 @@ class GameContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mistakes: 0,
+      mistakes: [],
       matchedPos: [],
       startDate: new Date()
     };
@@ -24,6 +24,15 @@ class GameContainer extends Component {
     }
 
     const lowKey = e.key.toLowerCase();
+
+    let keyAttempted = this.state.mistakes.find(function(key) {
+      return lowKey === key;
+    });
+    // This prevents repeating
+    if (keyAttempted != null) {
+      return;
+    }
+
     const matchesPos = [];
     // Note: this test content will be replaced with an actual prop from redux
     let found = false;
@@ -41,7 +50,7 @@ class GameContainer extends Component {
     }
 
     if (matchesPos.length == 0) {
-      this.setState({ mistakes: (this.state.mistakes+1) });
+      this.setState({ mistakes: this.state.mistakes.concat([ lowKey ]) });
       return;
     }
 
@@ -51,7 +60,7 @@ class GameContainer extends Component {
   handleRestart = e => {
     e.preventDefault();
     this.setState({ 
-      mistakes: 0, 
+      mistakes: [], 
       matchedPos: [],
       startDate: new Date()
     });

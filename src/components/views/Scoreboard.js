@@ -15,7 +15,7 @@ function ScoreboardView(props) {
       <div style={{textAlign:"center"}}>
         <p>Congratulations!</p>
         <p>You have guessed: <br />&quot;{props.content}&quot;</p>
-        <p>You have {props.mistakes} failed attempts.</p>
+        <p>You have {props.mistakes.length} failed attempts.</p>
         <p>In a duration of {finishTime} {inSeconds ? 'seconds' : 'minutes'}</p>
         <p>Your score: {calculateScoreByErrorCount(props.mistakes)}</p>
       </div>

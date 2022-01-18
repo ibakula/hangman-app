@@ -16,7 +16,7 @@ class ScoreboardContainer extends Component {
     /*if (this.props.scoresData != prevProps.scoresData) {
       let data = this.props.scoresData.concat([{
         userName: `${this.props.playerName} (You)`,
-        errors: this.props.mistakes
+        errors: this.props.mistakes.length
       }]);
       this.setState({ 
         highscores: orderHighscores(data, false)
