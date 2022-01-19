@@ -35,7 +35,9 @@ function WordsView(props) {
   }
 
   return (
-    <h1 className={style.spacing}>{lettersAndDashes}</h1>
+    <div className={style.textContainer}>
+      <h3 className={`${style.spacing} ${style.textCenter}`}>{lettersAndDashes}</h3>
+    </div>
   );
 }
 
