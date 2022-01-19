@@ -7,7 +7,7 @@ import axios from 'axios';
 export const fetchHighscores = createAsyncThunk(
   'scores/fetchHighscores', 
   async function () { 
-    const response = axios.get("/highscores");
+    const response = await axios.get("/highscores");
     return response.data;
   }
 );
@@ -21,7 +21,9 @@ const scoresSlice = createSlice({
   initialState: initState,
   extraReducers: function (builder) {
     builder.addCase(fetchHighscores.fulfilled, function(state, action) {
-      return action.payload;
+      return { 
+        highscores: action.payload
+      };
     })
     .addCase(fetchHighscores.pending, function(state, action) {
       return initState;
