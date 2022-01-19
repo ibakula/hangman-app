@@ -4,7 +4,7 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const fetchRandomQuote = createAsyncThunk(
+export const fetchRandomQuote = createAsyncThunk(
   'quote/fetchRandomQuote', 
   async function () { 
     const response = await axios.get("/randomQuote");
@@ -28,7 +28,7 @@ const quoteSlice = createSlice({
     })
     .addCase(fetchRandomQuote.rejected, function(state, action) {
       return { 
-        content: action.payload.error
+        content: action.error
       };
     });
   }

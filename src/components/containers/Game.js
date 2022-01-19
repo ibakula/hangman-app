@@ -4,6 +4,10 @@ import {
   calculatePossibleMatches,
   isNotValidKey 
 } from '../utils/calc-utils.js';
+import { 
+  connect 
+} from 'react-redux';
+import { fetchRandomQuote } from '../../reducers/quote';
 
 class GameContainer extends Component {
   constructor(props) {
@@ -11,8 +15,9 @@ class GameContainer extends Component {
     this.state = {
       mistakes: [],
       matchedPos: [],
-      startDate: new Date()
+      startDate: null
     };
+    this.props.fetchQuote();
   }
 
   handleSelectedLetter = e => {
@@ -59,15 +64,13 @@ class GameContainer extends Component {
 
   handleRestart = e => {
     e.preventDefault();
+    if (this.props.quote.content == null) {
+      return;
+    }
     this.setState({ 
       mistakes: [], 
-      matchedPos: [],
-      startDate: new Date()
+      matchedPos: []
     });
-  }
-
-  componentDidMount() {
-    document.addEventListener("keypress", this.handleSelectedLetter, false);
   }
 
   componentWillUnmount() {
@@ -75,11 +78,18 @@ class GameContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (this.props.quote.content == null) {
+      document.removeEventListener("keypress", this.handleSelectedLetter, false);
+      return;
+    }
     if (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici...")) {
       document.removeEventListener("keypress", this.handleSelectedLetter, false);
     }
     if (this.state.matchedPos.length == 0 && 
-      prevState.matchedPos != this.state.matchedPos) {
+      (prevState.matchedPos != this.state.matchedPos && 
+      (typeof(this.props.quote.content) === "string" && 
+      this.props.quote.content !== prevProps.quote.content))) {
+      this.setState({ startDate: new Date() });
       document.addEventListener("keypress", this.handleSelectedLetter, false);
     }
   }
@@ -91,11 +101,25 @@ class GameContainer extends Component {
         matchedPos={this.state.matchedPos}
         mistakes={this.state.mistakes}
         handleRestart={this.handleRestart}
-        content={"Veni; vidi; vici..."}
+        quote={this.props.quote}
         startDate={this.state.startDate}
       />
     );
   }
 }
 
-export default GameContainer;
+function mapStateToProps(state) {
+  return {
+    quote: state.quote
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchQuote() {
+      dispatch(fetchRandomQuote());
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameContainer);

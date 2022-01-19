@@ -3,28 +3,32 @@ import ScoreboardView from '../views/Scoreboard';
 import {
   orderHighscores
 } from './scoreboard/Utils';
+import {
+  connect
+} from 'react-redux';
+import {
+  fetchHighscores
+} from '../../reducers/scoreboard';
 
 class ScoreboardContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      highscores: null
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    /*if (this.props.scoresData != prevProps.scoresData) {
-      let data = this.props.scoresData.concat([{
-        userName: `${this.props.playerName} (You)`,
-        errors: this.props.mistakes.length
-      }]);
-      this.setState({ 
-        highscores: orderHighscores(data, false)
-      });
-    }*/
+    this.props.fetchScores();
   }
 
   render() {
+    let data = Array.isArray(this.props.highscores) ? 
+    this.props.highscores.concat([{
+      userName: `${this.props.playerName} (You)`,
+      errors: this.props.mistakes.length
+    }]) : this.props.highscores != null && 
+    'message' in this.props.highscores ? 
+    [{
+      userName: `${this.props.playerName} (You)`,
+      errors: this.props.mistakes.length
+    }] : 
+    this.props.highscores;
+
     return (
       <ScoreboardView 
         content={this.props.content}
@@ -32,10 +36,24 @@ class ScoreboardContainer extends Component {
         mistakes={this.props.mistakes}
         startDate={this.props.startDate} 
         endDate={new Date()}
-        scores={this.state.highscores}
+        scores={data}
       />
     );
   }
 }
 
-export default ScoreboardContainer;
+function mapStateToProps(state) {
+  return {
+    highscores: state.scores.highscores
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchScores() {
+      dispatch(fetchHighscores());
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreboardContainer);

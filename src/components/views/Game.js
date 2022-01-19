@@ -4,12 +4,12 @@ import { calculatePossibleMatches } from '../utils/calc-utils.js';
 import ScoreboardContainer from '../containers/Scoreboard';
 
 function GameView(props) {
-  let gameOver = props.matchedPos.length >= calculatePossibleMatches(props.content);
+  let gameOver = props.quote.content != null && props.matchedPos.length >= calculatePossibleMatches(props.quote.content);
 
   return (
     <>
       {gameOver ? (<ScoreboardContainer 
-        content={props.content}
+        quote={props.quote}
         startDate={props.startDate}
         playerName={props.playerName} 
         mistakes={props.mistakes} />) : 
@@ -20,7 +20,7 @@ function GameView(props) {
           mistakes={props.mistakes}
         />
         <WordsView 
-          content={props.content} 
+          content={props.quote.content} 
           matchedPos={props.matchedPos}
         />
       </>)}

@@ -2,6 +2,19 @@ import style from './Words.module.css';
 import { isNotValidKey } from '../utils/calc-utils';
 
 function WordsView(props) {
+  if (props.content == null) {
+    return (
+      <h1 className={style.spacing}>Loading a quote...</h1>
+    );
+  }
+  
+  if (typeof(props.content) !== "string" && 
+    'message' in props.content) {
+    return (
+      <h1 className={`${style.spacing} ${style.textCenter}`}>Could not start the game.<br /> Error: {props.content.message}</h1>
+    );
+  }
+
   let lettersAndDashes = "";
   for (let i = 0; i < props.content.length; ++i) {
     if (isNotValidKey(props.content.charCodeAt(i))) {

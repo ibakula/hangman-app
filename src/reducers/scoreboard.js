@@ -4,7 +4,7 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const fetchHighscores = createAsyncThunk(
+export const fetchHighscores = createAsyncThunk(
   'scores/fetchHighscores', 
   async function () { 
     const response = axios.get("/highscores");
@@ -28,7 +28,7 @@ const scoresSlice = createSlice({
     })
     .addCase(fetchHighscores.rejected, function(state, action) {
       return { 
-        highscores: action.payload.error
+        highscores: action.error
       };
     });
   }

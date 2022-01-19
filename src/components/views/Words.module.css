@@ -1,3 +1,7 @@
 .spacing {
   letter-spacing: 3px;
 }
+
+.textCenter {
+  text-align: center;
+}

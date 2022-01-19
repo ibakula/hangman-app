@@ -41,3 +41,7 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #dddddd;
 }
+
+input[type=submit]:active {
+  background-color: #dddddd;
+}
