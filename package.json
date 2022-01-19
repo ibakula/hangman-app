@@ -22,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "configure": "npm install && npm run build && aptitude install nginx && systemctl stop nginx && cp ./config/server.conf /etc/nginx/sites-available/default && rm -r /etc/nginx/sites-enabled/* && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default && systemctl start nginx"
+    "configure": "npm install && npm run build && aptitude install nginx && systemctl stop nginx && cp ./config/server.conf /etc/nginx/sites-available/default && rm -r /etc/nginx/sites-enabled/* && ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default"
   },
   "eslintConfig": {
     "extends": [
