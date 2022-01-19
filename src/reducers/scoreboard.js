@@ -4,6 +4,14 @@ import {
 } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+export const sendScore = createAsyncThunk(
+  'scores/sendScore',
+  async function(score) {
+    const response = await axios.post("highscores", score);
+    return response;
+  }
+);
+
 export const fetchHighscores = createAsyncThunk(
   'scores/fetchHighscores', 
   async function () { 

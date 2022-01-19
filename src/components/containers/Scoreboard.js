@@ -3,7 +3,7 @@ import ScoreboardView from '../views/Scoreboard';
 import { orderHighscores } from '../utils/sorting-utils';
 import { calculateUniqueCharactersCount } from '../utils/calc-utils';
 import { connect } from 'react-redux';
-import { fetchHighscores } from '../../reducers/scoreboard';
+import { fetchHighscores, sendScore } from '../../reducers/scoreboard';
 
 class ScoreboardContainer extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class ScoreboardContainer extends Component {
       uniqueCharacters: calculateUniqueCharactersCount(this.props.quote.content),
       duration: new Date().getTime() - props.startDate.getTime()
     };
+    this.props.postScore(this.ownData);
   }
 
   render() {
@@ -49,6 +50,9 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchScores() {
       dispatch(fetchHighscores());
+    },
+    postScore(score) {
+      dispatch(sendScore(score));
     }
   };
 }
