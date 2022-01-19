@@ -22,8 +22,9 @@ class GameContainer extends Component {
 
   handleSelectedLetter = e => {
     if (!(e instanceof KeyboardEvent) ||
+      typeof(this.props.quote.content) !== "string" ||
       // Game over
-      (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici...")) ||
+      (this.state.matchedPos.length >= calculatePossibleMatches(this.props.quote.content)) ||
       isNotValidKey(e.keyCode)) {
       return;
     }
@@ -41,9 +42,9 @@ class GameContainer extends Component {
     const matchesPos = [];
     // Note: this test content will be replaced with an actual prop from redux
     let found = false;
-    const testContent = "veni; vidi; vici...";
-    for (let i = 0; i < testContent.length; ++i) {
-      if (testContent[i] === lowKey) {
+    let lowerCaseContent = this.props.quote.content.toLowerCase();
+    for (let i = 0; i < lowerCaseContent.length; ++i) {
+      if (lowerCaseContent[i] === lowKey) {
         found = this.state.matchedPos.find(function (pos) {
           return (pos == i);
         });
@@ -71,26 +72,20 @@ class GameContainer extends Component {
       mistakes: [], 
       matchedPos: []
     });
+    this.props.fetchQuote();
+  }
+
+  componentDidMount() {
+    document.addEventListener("keypress", this.handleSelectedLetter, false);
   }
 
   componentWillUnmount() {
     document.removeEventListener("keypress", this.handleSelectedLetter, false);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.quote.content == null) {
-      document.removeEventListener("keypress", this.handleSelectedLetter, false);
-      return;
-    }
-    if (this.state.matchedPos.length >= calculatePossibleMatches("Veni; vidi; vici...")) {
-      document.removeEventListener("keypress", this.handleSelectedLetter, false);
-    }
-    if (this.state.matchedPos.length == 0 && 
-      (prevState.matchedPos != this.state.matchedPos && 
-      (typeof(this.props.quote.content) === "string" && 
-      this.props.quote.content !== prevProps.quote.content))) {
-      this.setState({ startDate: new Date() });
-      document.addEventListener("keypress", this.handleSelectedLetter, false);
+  componentDidUpdate(prevProps) {
+    if (prevProps.quote.content !== this.props.quote.content) {
+      this.setState({ startDate: new Date });
     }
   }
 
