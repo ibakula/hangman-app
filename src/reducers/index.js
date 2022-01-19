@@ -1,5 +1,11 @@
 import quoteReducer from './quote';
+import scoresReducer from './scoreboard';
 
-export default { 
-  quote: quoteReducer
+const reducer = {
+  reducer: { 
+    quote: quoteReducer,
+    scores: scoresReducer
+  }
 };
+
+export default reducer;

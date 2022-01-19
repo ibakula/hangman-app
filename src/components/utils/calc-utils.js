@@ -40,8 +40,13 @@ export function isNotValidKey(keyCode) {
      keyCode > 122);
 };
 
-export function calculateScore(quoteLength, uniqueLetters, errors, duration) {
-  return 0;
+/*
+ * @DESCRIPTION:
+ *  Smart score sorting function.
+ *  Returns a new highscores object.
+ */
+export function sortHighscore(quoteLength, uniqueLetters, errors, duration) {
+  
 };
 
 // Score calculation by error count solely

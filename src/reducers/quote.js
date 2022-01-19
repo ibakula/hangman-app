@@ -1,14 +1,36 @@
-import { createSlice } from '@redux/toolkit';
+import { 
+  createAsyncThunk, 
+  createSlice 
+} from '@reduxjs/toolkit';
 import axios from 'axios';
 
+const fetchRandomQuote = createAsyncThunk(
+  'quote/fetchRandomQuote', 
+  async function () { 
+    const response = await axios.get("/randomQuote");
+    return response.data;
+  }
+);
+
 const initState = {
-  quote: ""
+  content: null
 };
 
-const quoteSlice = createSLice({
+const quoteSlice = createSlice({
   name: 'quote',
   initialState: initState,
   extraReducers: function (builder) {
+    builder.addCase(fetchRandomQuote.fulfilled, function(state, action) {
+      return action.payload;
+    })
+    .addCase(fetchRandomQuote.pending, function(state, action) {
+      return initState;
+    })
+    .addCase(fetchRandomQuote.rejected, function(state, action) {
+      return { 
+        content: action.payload.error
+      };
+    });
   }
 });
 
