@@ -7,7 +7,7 @@ import axios from 'axios';
 export const fetchRandomQuote = createAsyncThunk(
   'quote/fetchRandomQuote', 
   async function () { 
-    const response = await axios.get("/randomQuote");
+    const response = await axios.get("http://api.quotable.io/random");
     return response.data;
   }
 );

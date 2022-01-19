@@ -7,7 +7,7 @@ import axios from 'axios';
 export const sendScore = createAsyncThunk(
   'scores/sendScore',
   async function(score) {
-    const response = await axios.post("highscores", score);
+    const response = await axios.post("http://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores", score);
     return response;
   }
 );
@@ -15,7 +15,7 @@ export const sendScore = createAsyncThunk(
 export const fetchHighscores = createAsyncThunk(
   'scores/fetchHighscores', 
   async function () { 
-    const response = await axios.get("/highscores");
+    const response = await axios.get("http://my-json-server.typicode.com/stanko-ingemark/hang_the_wise_man_frontend_task/highscores");
     return response.data;
   }
 );
