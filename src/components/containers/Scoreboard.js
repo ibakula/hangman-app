@@ -28,10 +28,13 @@ class ScoreboardContainer extends Component {
       errors: this.props.mistakes.length
     }] : 
     this.props.highscores;
+    if (Array.isArray(data)) {
+      data = orderHighscores(data, false);
+    }
 
     return (
       <ScoreboardView 
-        content={this.props.content}
+        content={this.props.quote.content}
         playerName={this.props.playerName}
         mistakes={this.props.mistakes}
         startDate={this.props.startDate} 

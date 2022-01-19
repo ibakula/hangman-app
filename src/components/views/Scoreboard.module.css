@@ -5,3 +5,8 @@
 .noTdBorder {
   border-spacing: 0px;
 }
+
+.scoreboardContainer {
+  max-width: 400px;
+  text-align: center;
+}

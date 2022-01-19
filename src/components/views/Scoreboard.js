@@ -12,7 +12,7 @@ function ScoreboardView(props) {
 
   return (
     <>
-      <div style={{textAlign:"center"}}>
+      <div className={style.scoreboardContainer}>
         <p>Congratulations!</p>
         <p>You have guessed: <br /><i>&quot;{props.content}&quot;</i></p>
         <p>You have {props.mistakes.length} failed attempts.</p>
