@@ -45,11 +45,37 @@ export function isNotValidKey(keyCode) {
  *  Smart score sorting function.
  *  Returns a new highscores object.
  */
-export function sortHighscore(quoteLength, uniqueLetters, errors, duration) {
-  
+export function computeScore(quoteLength, uniqueLetters, errors, duration) {
+  let errorBasedScore = 100/(1+errors);
+  let first = 0.5 * (errorBasedScore == 100 ? (1 - errorBasedScore) : ((100/errors) - errorBasedScore));
+  let errAndUnqLtrsBasedScore = errorBasedScore + first / (1 + Math.exp((-uniqueLetters)));
+  let second = 0.5 * (errAndUnqLtrsBasedScore - (errorBasedScore + first / (1 + Math.exp((-(uniqueLetters+1))))));
+  let errAndUnqLtrsAndLengthBasedScore = errorBasedScore + second / (1 + Math.exp((-quoteLength)));
+  let errAndUnqLtrsAndLengthBasedScoreTemp = errorBasedScore + second / (1 +  Math.exp((-(quoteLength+1))));
+  let third = 0.5 * (errAndUnqLtrsAndLengthBasedScore - errAndUnqLtrsAndLengthBasedScoreTemp);
+  let final = errAndUnqLtrsAndLengthBasedScoreTemp + third * (1 - (1/(1+Math.exp((-duration)))));
+  return final;  
 };
 
 // Score calculation by error count solely
 export function calculateScoreByErrorCount(errorCount) {
   return (100/1+errorCount);
+};
+
+export function calculateUniqueCharactersCount(content) {
+  const contentLow = content.toLowerCase();
+  const lastPos = content.length-1;
+  let count = 0;
+  for (let i = 0; i < contentLow.length; ++i) {
+    for (let u = 0; u < contentLow.length && u != i; ++u) {
+      if (contentLow[u] === contentLow[i]) {
+        break;
+      }
+      if (u == lastPos) {
+        ++count;
+      }
+    }
+  }
+
+  return count;
 };

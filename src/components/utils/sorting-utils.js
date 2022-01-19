@@ -1,14 +1,15 @@
 import { 
-  calculateScoreByErrorCount 
-} from '../../utils/calc-utils';
+  calculateScoreByErrorCount, 
+  computeScore
+} from './calc-utils';
 
-export function orderHighscores(data, orderByAsc = true) {
+export function orderHighscores(data, orderByAsc = true, computeComplex = true) {
   let orderedHighscore = [];
 
   if (Array.isArray(data)) {
     data.forEach(function(score) {
       let calculatedScore = {
-        score: calculateScoreByErrorCount(score.errors),
+        score: computeComplex ? computeScore(score.length, score.uniqueCharacters, score.errors, score.duration) : calculateScoreByErrorCount(score.errors),
         userName: score.userName
       };
 

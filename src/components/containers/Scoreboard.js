@@ -1,32 +1,28 @@
 import { Component } from 'react';
 import ScoreboardView from '../views/Scoreboard';
-import {
-  orderHighscores
-} from './scoreboard/Utils';
-import {
-  connect
-} from 'react-redux';
-import {
-  fetchHighscores
-} from '../../reducers/scoreboard';
+import { orderHighscores } from '../utils/sorting-utils';
+import { calculateUniqueCharactersCount } from '../utils/calc-utils';
+import { connect } from 'react-redux';
+import { fetchHighscores } from '../../reducers/scoreboard';
 
 class ScoreboardContainer extends Component {
   constructor(props) {
     super(props);
     this.props.fetchScores();
+    this.ownData = {
+      userName: this.props.playerName,
+      errors: this.props.mistakes.length,
+      length: this.props.quote.content.length,
+      uniqueCharacters: calculateUniqueCharactersCount(this.props.quote.content),
+      duration: new Date().getTime() - props.startDate.getTime()
+    };
   }
 
   render() {
     let data = Array.isArray(this.props.highscores) ? 
-    this.props.highscores.concat([{
-      userName: `${this.props.playerName} (You)`,
-      errors: this.props.mistakes.length
-    }]) : this.props.highscores != null && 
+    this.props.highscores.concat([ this.ownData ]) : this.props.highscores != null && 
     'message' in this.props.highscores ? 
-    [{
-      userName: `${this.props.playerName} (You)`,
-      errors: this.props.mistakes.length
-    }] : 
+    [ this.ownData ] : 
     this.props.highscores;
     if (Array.isArray(data)) {
       data = orderHighscores(data, false);
@@ -35,10 +31,8 @@ class ScoreboardContainer extends Component {
     return (
       <ScoreboardView 
         content={this.props.quote.content}
-        playerName={this.props.playerName}
-        mistakes={this.props.mistakes}
         startDate={this.props.startDate} 
-        endDate={new Date()}
+        ownData={this.ownData}
         scores={data}
       />
     );

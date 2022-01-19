@@ -1,8 +1,7 @@
-import { calculateScoreByErrorCount } from '../utils/calc-utils.js';
 import style from './Scoreboard.module.css';
 
 function ScoreboardView(props) {
-  let finishTime = props.endDate.getTime() - props.startDate.getTime();
+  let finishTime = props.ownData.duration;
   finishTime /= 60000;
   const inSeconds = finishTime < 1;
   if (inSeconds) {
@@ -15,24 +14,19 @@ function ScoreboardView(props) {
       <div className={style.scoreboardContainer}>
         <p>Congratulations!</p>
         <p>You have guessed: <br /><i>&quot;{props.content}&quot;</i></p>
-        <p>You have {props.mistakes.length} failed attempts.</p>
+        <p>You have {props.ownData.errors} failed attempts.</p>
         <p>In a duration of {finishTime} {inSeconds ? 'seconds' : 'minutes'}</p>
-        <p>Your score: {calculateScoreByErrorCount(props.mistakes.length)}</p>
+        <p>Your score is highlighted <mark>yellow</mark>.</p>
       </div>
       <table className={style.noTdBorder}>
         <tr><th>Player</th><th>Score</th></tr>
         {
           Array.isArray(props.scores) ? 
           props.scores.map(function(score) {
-            if (score.userName.search(/you/i) != -1) {
-              return (<tr className={style.highlight}>
-                <td>{score.userName}</td>
-                <td>{score['score']}</td>
-              </tr>);
-            }
+            let highlight = score.userName.search(props.ownData.userName) != -1 ? style.highlight : '';
             return (<tr>
-              <td>{score.userName}</td>
-              <td>{score['score']}</td>
+              <td className={highlight}>{score.userName}</td>
+              <td className={highlight}>{score['score'].toPrecision(3)}</td>
             </tr>);
           }) : 
           (<tr><td colspan="2">Loading highscores..</td></tr>)
