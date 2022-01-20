@@ -46,7 +46,7 @@ export function isNotValidKey(keyCode) {
  *  Returns a new highscores object.
  */
 export function computeScore(quoteLength, uniqueLetters, errors, duration) {
-  let errorBasedScore = 100/(1+errors);
+  let errorBasedScore = 100/(Math.sqrt(1+errors));
   let first = 0.5 * (errorBasedScore == 100 ? (1 - errorBasedScore) : ((100/errors) - errorBasedScore));
   let errAndUnqLtrsBasedScore = errorBasedScore + first / (1 + Math.exp((-uniqueLetters)));
   let second = 0.5 * (errAndUnqLtrsBasedScore - (errorBasedScore + first / (1 + Math.exp((-(uniqueLetters+1))))));
@@ -64,16 +64,22 @@ export function calculateScoreByErrorCount(errorCount) {
 
 export function calculateUniqueCharactersCount(content) {
   const contentLow = content.toLowerCase();
-  const lastPos = content.length-1;
   let count = 0;
   for (let i = 0; i < contentLow.length; ++i) {
-    for (let u = 0; u < contentLow.length && u != i; ++u) {
+    if (isNotValidKey(contentLow.charCodeAt(i))) {
+      continue;
+    }
+    let u = 0;
+    for (; u < contentLow.length; ++u) {
+      if (u == i) {
+        continue;
+      }
       if (contentLow[u] === contentLow[i]) {
         break;
       }
-      if (u == lastPos) {
-        ++count;
-      }
+    }
+    if (u == contentLow.length) {
+      ++count;
     }
   }
 
