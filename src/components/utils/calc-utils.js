@@ -40,21 +40,29 @@ export function isNotValidKey(keyCode) {
      keyCode > 122);
 };
 
-/*
- * @DESCRIPTION:
- *  Smart score sorting function.
- *  Returns a new highscores object.
- */
+// errors: 1023 cap / 10 bits
+// uniqueLetters: 1023 cap / 10 bits
+// quoteLength: 1023 cap / 10 bits
+// duration (ms): 59940000 cap (999 mins) / 26 bits
+function calculateVanillaScore(quoteLength, uniqueLetters) {
+  // this initial number will be used for score reduction based on error count
+  let score = 10230000000000000000;
+  score += ((uniqueLetters > 1023 ? 1023 : uniqueLetters)*1000000000000);
+  score += ((quoteLength > 1023 ? 1023 : quoteLength)*100000000);
+  score += 59940000;
+  return score;
+}
+
 export function computeScore(quoteLength, uniqueLetters, errors, duration) {
-  let errorBasedScore = 100/(Math.sqrt(1+errors));
-  let first = 0.5 * (errorBasedScore == 100 ? (1 - errorBasedScore) : ((100/errors) - errorBasedScore));
-  let errAndUnqLtrsBasedScore = errorBasedScore + first / (1 + Math.exp((-uniqueLetters)));
-  let second = 0.5 * (errAndUnqLtrsBasedScore - (errorBasedScore + first / (1 + Math.exp((-(uniqueLetters+1))))));
-  let errAndUnqLtrsAndLengthBasedScore = errorBasedScore + second / (1 + Math.exp((-quoteLength)));
-  let errAndUnqLtrsAndLengthBasedScoreTemp = errorBasedScore + second / (1 +  Math.exp((-(quoteLength+1))));
-  let third = 0.5 * (errAndUnqLtrsAndLengthBasedScore - errAndUnqLtrsAndLengthBasedScoreTemp);
-  let final = errAndUnqLtrsAndLengthBasedScoreTemp + third * (1 - (1/(1+Math.exp((-duration)))));
-  return final;  
+  const vanillaScore = calculateVanillaScore(quoteLength, uniqueLetters);
+  let score = vanillaScore;
+  score -= ((errors > 1023 ? 1023 : errors)*10000000000000);
+  score -= (duration > 59940000 ? 59940000 : duration);
+
+  return { 
+    maxScore: vanillaScore,
+    score
+  };
 };
 
 // Score calculation by error count solely
