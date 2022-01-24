@@ -24,9 +24,10 @@ function ScoreboardView(props) {
           Array.isArray(props.scores) ? 
           props.scores.map(function(score) {
             let highlight = score.userName.search(props.ownData.userName) != -1 ? style.highlight : '';
+            let percentage = (score.scoreData['score']/score.scoreData.maxScore)*100;
             return (<tr>
               <td className={highlight}>{score.userName}</td>
-              <td className={highlight}>{score['score'].toPrecision(3)}</td>
+              <td className={highlight}>{`${percentage}`.slice(0, 4)+"%"}</td>
             </tr>);
           }) : 
           (<tr><td colspan="2">Loading highscores..</td></tr>)

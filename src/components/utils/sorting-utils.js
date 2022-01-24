@@ -9,7 +9,7 @@ export function orderHighscores(data, orderByAsc = true, computeComplex = true) 
   if (Array.isArray(data)) {
     data.forEach(function(score) {
       let calculatedScore = {
-        score: computeComplex ? computeScore(score.length, score.uniqueCharacters, score.errors, score.duration) : calculateScoreByErrorCount(score.errors),
+        scoreData: computeComplex ? computeScore(score.length, score.uniqueCharacters, score.errors, score.duration) : calculateScoreByErrorCount(score.errors),
         userName: score.userName
       };
 
@@ -20,12 +20,12 @@ export function orderHighscores(data, orderByAsc = true, computeComplex = true) 
 
       for (let i = 0; i < orderedHighscore.length; ++i) {
         if (orderByAsc && 
-          orderedHighscore[i].score > calculatedScore.score) {
+          orderedHighscore[i].scoreData.score > calculatedScore.scoreData.score) {
           orderedHighscore.splice(i, 0, calculatedScore);
           break;
         }
         else if (!orderByAsc && 
-          orderedHighscore[i].score < calculatedScore.score) {
+          orderedHighscore[i].scoreData.score < calculatedScore.scoreData.score) {
           orderedHighscore.splice(i, 0, calculatedScore);
           break;
         }
