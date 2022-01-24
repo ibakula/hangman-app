@@ -1,5 +1,5 @@
 import style from './Words.module.css';
-import { isNotValidKey } from '../utils/calc-utils';
+import { isNotValidKey } from '../../utilities/calculation';
 
 function WordsView(props) {
   if (props.content == null) {

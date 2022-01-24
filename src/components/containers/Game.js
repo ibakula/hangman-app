@@ -3,7 +3,7 @@ import GameView from '../views/Game';
 import { 
   calculatePossibleMatches,
   isNotValidKey 
-} from '../utils/calc-utils.js';
+} from '../../utilities/calculation';
 import { 
   connect 
 } from 'react-redux';

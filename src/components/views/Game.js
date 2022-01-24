@@ -1,6 +1,6 @@
 import WordsView from './Words';
 import HangmanView from './Hangman';
-import { calculatePossibleMatches } from '../utils/calc-utils.js';
+import { calculatePossibleMatches } from '../../utilities/calculation';
 import ScoreboardContainer from '../containers/Scoreboard';
 
 function GameView(props) {

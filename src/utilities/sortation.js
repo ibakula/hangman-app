@@ -1,7 +1,7 @@
 import { 
   calculateScoreByErrorCount, 
   computeScore
-} from './calc-utils';
+} from './calculation';
 
 export function orderHighscores(data, orderByAsc = true, computeComplex = true) {
   let orderedHighscore = [];
