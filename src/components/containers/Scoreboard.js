@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import ScoreboardView from '../views/Scoreboard';
 import { orderHighscores } from '../../utilities/sortation';
-import { calculateUniqueCharactersCount } from '../../utilities/calculation';
+import { deductUniqueLettersCountFrom } from '../../utilities/calculation';
 import { connect } from 'react-redux';
 import { fetchHighscores, sendScore } from '../../reducers/scoreboard';
 

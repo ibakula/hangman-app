@@ -1,5 +1,7 @@
 import style from './Words.module.css';
-import { isNotValidKey } from '../../utilities/calculation';
+import { 
+  isAnInvalidKeycode
+} from '../../utilities/calculation';
 
 function WordsView(props) {
   if (props.content == null) {
@@ -17,7 +19,7 @@ function WordsView(props) {
 
   let lettersAndDashes = "";
   for (let i = 0; i < props.content.length; ++i) {
-    if (isNotValidKey(props.content.charCodeAt(i))) {
+    if (isAnInvalidKeycode(props.content.charCodeAt(i))) {
       lettersAndDashes += props.content[i];
       continue;
     }

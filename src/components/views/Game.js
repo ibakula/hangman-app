@@ -1,10 +1,12 @@
 import WordsView from './Words';
 import HangmanView from './Hangman';
-import { calculatePossibleMatches } from '../../utilities/calculation';
+import { 
+  deductValidCharacterCountFrom
+} from '../../utilities/calculation';
 import ScoreboardContainer from '../containers/Scoreboard';
 
 function GameView(props) {
-  let gameOver = props.quote.content != null && props.matchedPos.length >= calculatePossibleMatches(props.quote.content);
+  let gameOver = props.quote.content != null && props.matchedPos.length >= deductValidCharacterCountFrom(props.quote.content);
 
   return (
     <>
