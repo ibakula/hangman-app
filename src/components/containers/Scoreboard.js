@@ -13,7 +13,7 @@ class ScoreboardContainer extends Component {
       userName: this.props.playerName,
       errors: this.props.mistakes.length,
       length: this.props.quote.content.length,
-      uniqueCharacters: calculateUniqueCharactersCount(this.props.quote.content),
+      uniqueCharacters: deductUniqueLettersCountFrom(this.props.quote.content),
       duration: new Date().getTime() - props.startDate.getTime()
     };
     this.props.postScore(this.ownData);

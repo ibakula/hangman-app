@@ -2,7 +2,7 @@ import { Component } from 'react';
 import GameView from '../views/Game';
 import { 
   deductValidCharacterCountFrom,
-  isNotValidKey 
+  isAnInvalidKeycode 
 } from '../../utilities/calculation';
 import { 
   connect 
@@ -25,7 +25,7 @@ class GameContainer extends Component {
       typeof(this.props.quote.content) !== "string" ||
       // Game over
       (this.state.matchedPos.length >= deductValidCharacterCountFrom(this.props.quote.content)) ||
-      isNotValidKey(e.keyCode)) {
+      isAnInvalidKeycode(e.keyCode)) {
       return;
     }
 
